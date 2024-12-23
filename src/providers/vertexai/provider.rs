@@ -216,7 +216,7 @@ impl Provider for VertexAIProvider {
 /// Fetches the Google Cloud OAuth 2.0 token using ADC.
 async fn get_auth_token() -> Result<String, anyhow::Error> {
     let token = env::var("GOOGLE_APPLICATION_CREDENTIALS").ok();
-    if let Some(_) = token {
+    if token.is_some() {
         let response = Client::new()
             .post("https://oauth2.googleapis.com/token")
             .json(&serde_json::json!({
